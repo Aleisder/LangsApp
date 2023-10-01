@@ -7,4 +7,8 @@
     <string name="create_account">Create account</string>
     <string name="continue_with_facebook">Continue with Facebook</string>
     <string name="or">Or</string>
+
+    <string name="confirm_email">Подтвердите почту</string>
+    <string name="confirm_email_body_1">Мы отправили Вам на почту </string>
+    <string name="confirm_email_body_2"> письмо с кодом для завершения регистрации</string>
 </resources>

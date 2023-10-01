@@ -6,4 +6,8 @@
     <string name="create_account">Create account</string>
     <string name="continue_with_facebook">Continue with Facebook</string>
     <string name="or">Or</string>
+
+    <string name="confirm_email">Confirm email</string>
+    <string name="confirm_email_body_1">We have sent an email on </string>
+    <string name="confirm_email_body_2"> with 6 sign code to complete your registration</string>
 </resources>
