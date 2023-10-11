@@ -1,6 +1,5 @@
 package com.tsarenko.langsapp.di
 
-import android.view.animation.LayoutAnimationController
 import com.tsarenko.langsapp.data.remote.LangsApi
 import dagger.Module
 import dagger.Provides

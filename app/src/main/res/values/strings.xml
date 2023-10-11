@@ -10,4 +10,7 @@
     <string name="confirm_email">Confirm email</string>
     <string name="confirm_email_body_1">We have sent an email on </string>
     <string name="confirm_email_body_2"> with 6 sign code to complete your registration</string>
+    <string name="how_many_words_per_day">How many words you want to learn per day?</string>
+    <string name="next">Next</string>
+    <string name="basics">Basics</string>
 </resources>
