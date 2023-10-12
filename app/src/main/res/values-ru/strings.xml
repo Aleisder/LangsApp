@@ -14,4 +14,6 @@
     <string name="how_many_words_per_day">How many words you want to learn per day?</string>
     <string name="next">Next</string>
     <string name="basics">Basics</string>
+    <string name="what_your_native_language">Your native language</string>
+    <string name="native_language_description">The choosen language will be used as system language for the app. You can change it in the app settings</string>
 </resources>
