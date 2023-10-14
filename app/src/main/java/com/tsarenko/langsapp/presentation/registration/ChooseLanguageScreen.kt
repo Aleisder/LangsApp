@@ -1,6 +1,7 @@
 package com.tsarenko.langsapp.presentation.registration
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,11 +33,13 @@ import com.tsarenko.langsapp.util.VerticalSpacer
 fun ChooseLanguageScreen() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding(horizontal = 20.dp, vertical = 15.dp)
+        modifier = Modifier
+            .padding(horizontal = 20.dp, vertical = 15.dp)
+            .background(MaterialTheme.colorScheme.background)
     ) {
         Text(
             text = stringResource(id = R.string.select_language),
-            style = MaterialTheme.typography.titleLarge
+            style = MaterialTheme.typography.bodyLarge
         )
 
         VerticalSpacer(25)
@@ -104,7 +107,7 @@ fun LanguageList(
 }
 
 @Composable
-@Preview(showSystemUi = true, showBackground = true)
+@Preview(showSystemUi = true)
 fun NativeLanguageScreenPreview() {
     LangsAppTheme {
         ChooseLanguageScreen()
