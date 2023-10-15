@@ -11,9 +11,9 @@
     <string name="confirm_email">Подтвердите почту</string>
     <string name="confirm_email_body_1">Мы отправили Вам на почту </string>
     <string name="confirm_email_body_2"> письмо с кодом для завершения регистрации</string>
-    <string name="how_many_words_per_day">How many words you want to learn per day?</string>
-    <string name="next">Next</string>
-    <string name="basics">Basics</string>
-    <string name="select_language">Select language</string>
-    <string name="your_interests">Your interessts</string>
+    <string name="how_many_words_per_day">Сколько слов в день вы хотите изучать?</string>
+    <string name="next">Далее</string>
+    <string name="basics">Основы</string>
+    <string name="select_language">Выбери язык</string>
+    <string name="your_interests">Твои интересы</string>
 </resources>
