@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tsarenko.langsapp.R
+import com.tsarenko.langsapp.domain.model.Language
 import com.tsarenko.langsapp.ui.theme.LangsAppTheme
 import com.tsarenko.langsapp.ui.theme.Montserrat
 import com.tsarenko.langsapp.util.HorizontalSpacer

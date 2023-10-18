@@ -28,7 +28,7 @@ import com.tsarenko.langsapp.ui.theme.Montserrat
 import com.tsarenko.langsapp.util.NextButton
 import com.tsarenko.langsapp.util.VerticalSpacer
 
-@OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun YourInterestsScreen(
     interests: List<String>

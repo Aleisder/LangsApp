@@ -1,4 +1,4 @@
-package com.tsarenko.langsapp.presentation.registration
+package com.tsarenko.langsapp.domain.model
 
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.Immutable

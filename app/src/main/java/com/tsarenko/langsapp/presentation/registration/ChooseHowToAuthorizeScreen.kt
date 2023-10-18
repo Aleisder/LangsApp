@@ -23,14 +23,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.tsarenko.langsapp.R
 import com.tsarenko.langsapp.ui.theme.GeologicaFontFamily
 import com.tsarenko.langsapp.ui.theme.LangsAppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegistrationScreen(
-    viewModel: RegistrationViewModel = RegistrationViewModel()
+fun ChooseHowToAuthorizeScreen(
+    viewModel: RegistrationViewModel = hiltViewModel()
 ) {
 
     Column(
@@ -140,6 +141,6 @@ fun ContinueWithOutlinedButton(
 @Composable
 fun RegistrationScreenPreview() {
     LangsAppTheme {
-        RegistrationScreen()
+        ChooseHowToAuthorizeScreen(viewModel = hiltViewModel())
     }
 }

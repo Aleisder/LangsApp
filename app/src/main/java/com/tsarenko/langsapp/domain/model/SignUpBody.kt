@@ -1,4 +1,4 @@
-package com.tsarenko.langsapp.presentation.registration
+package com.tsarenko.langsapp.domain.model
 
 data class SignUpBody(
     val name: String,

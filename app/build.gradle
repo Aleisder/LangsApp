@@ -52,6 +52,7 @@ dependencies {
 
     // Dagger-Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
     // Retrofit
@@ -60,6 +61,7 @@ dependencies {
 
     // Jetpack Navigation
     implementation "androidx.navigation:navigation-compose:$navigation_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.2"
 
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.0')
