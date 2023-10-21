@@ -30,8 +30,8 @@ import com.tsarenko.langsapp.util.VerticalSpacer
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun YourInterestsScreen(
-    interests: List<String>
+fun InterestsScreen(
+    state: RegistrationState
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -45,7 +45,7 @@ fun YourInterestsScreen(
         VerticalSpacer(height = 25)
 
         FlowRow(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-            interests.forEach {
+            state.availableInterests.forEach {
                 var selected by remember { mutableStateOf(false)}
                 InterestChip(
                     interest = it,
@@ -89,19 +89,7 @@ fun InterestChip(
 @Preview(showSystemUi = true)
 @Composable
 fun YourInterestScreenPreview() {
-    YourInterestsScreen(
-        interests = listOf(
-            "Sports",
-            "Travelling",
-            "Art",
-            "Movies",
-            "Cartoons",
-            "Games",
-            "Financials",
-            "Programming",
-            "Music",
-            "Literature",
-            "Science"
-        )
+    InterestsScreen(
+        state = RegistrationState()
     )
 }

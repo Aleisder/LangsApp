@@ -22,16 +22,24 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.tsarenko.langsapp.R
 import com.tsarenko.langsapp.domain.model.Language
 import com.tsarenko.langsapp.ui.theme.LangsAppTheme
 import com.tsarenko.langsapp.ui.theme.Montserrat
 import com.tsarenko.langsapp.util.HorizontalSpacer
 import com.tsarenko.langsapp.util.NextButton
+import com.tsarenko.langsapp.util.Route
 import com.tsarenko.langsapp.util.VerticalSpacer
 
 @Composable
-fun ChooseLanguageScreen() {
+fun LanguageScreen(
+    navController: NavController,
+    state: RegistrationState,
+    onEvent: (RegistrationEvent) -> Unit
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -45,22 +53,17 @@ fun ChooseLanguageScreen() {
 
         VerticalSpacer(25)
 
-        val languages = listOf(
-            Language("Русский", R.drawable.russian_flag),
-            Language("English", R.drawable.usa_flag),
-            Language("Deutsch", R.drawable.german_flag),
-            Language("Español", R.drawable.spanish_flag),
-        )
-
         LanguageList(
-            languages = languages,
+            languages = state.availableLanguages,
             modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.weight(1f))
 
         NextButton(
-            onClick = { /*TODO*/ },
+            onClick = {
+                navController.navigate(Route.chooseYourInterests)
+            },
             modifier = Modifier.fillMaxWidth()
         )
     }
@@ -111,6 +114,10 @@ fun LanguageList(
 @Preview(showSystemUi = true)
 fun NativeLanguageScreenPreview() {
     LangsAppTheme {
-        ChooseLanguageScreen()
+        LanguageScreen(
+            navController = rememberNavController(),
+            state = RegistrationState(),
+            onEvent = hiltViewModel()
+        )
     }
 }

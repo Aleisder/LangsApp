@@ -24,14 +24,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.tsarenko.langsapp.R
 import com.tsarenko.langsapp.ui.theme.GeologicaFontFamily
 import com.tsarenko.langsapp.ui.theme.LangsAppTheme
+import com.tsarenko.langsapp.util.Route
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChooseHowToAuthorizeScreen(
-    viewModel: RegistrationViewModel = hiltViewModel()
+fun AuthorizeScreen(
+    navController: NavController,
+    state: RegistrationState,
+    onEvent: (RegistrationEvent) -> Unit
 ) {
 
     Column(
@@ -44,8 +49,8 @@ fun ChooseHowToAuthorizeScreen(
             text = stringResource(id = R.string.email)
         )
         OutlinedTextField(
-            value = "",
-            onValueChange = { },
+            value = state.email,
+            onValueChange = { onEvent(RegistrationEvent.SetEmail(it)) },
             modifier = Modifier
                 .fillMaxWidth()
         )
@@ -55,7 +60,10 @@ fun ChooseHowToAuthorizeScreen(
 
 
         Button(
-            onClick = viewModel::createAccount
+            onClick = {
+                navController.navigate(Route.chooseLanguage)
+            },
+            enabled = state.isEmailValid
         ) {
             Text(text = stringResource(id = R.string.create_account))
         }
@@ -69,7 +77,7 @@ fun ChooseHowToAuthorizeScreen(
         ContinueWithOutlinedButton(
             title = R.string.continue_with_google,
             logo = R.drawable.google_logo,
-            onClick = viewModel::continueWithGoogle
+            onClick = {}
         )
 
         Spacer(modifier = Modifier.height(10.dp))
@@ -77,7 +85,7 @@ fun ChooseHowToAuthorizeScreen(
         ContinueWithOutlinedButton(
             title = R.string.continue_with_facebook,
             logo = R.drawable.facebook_logo,
-            onClick = viewModel::continueWithFacebook
+            onClick = {}
         )
 
 
@@ -141,6 +149,10 @@ fun ContinueWithOutlinedButton(
 @Composable
 fun RegistrationScreenPreview() {
     LangsAppTheme {
-        ChooseHowToAuthorizeScreen(viewModel = hiltViewModel())
+        AuthorizeScreen(
+            navController = rememberNavController(),
+            state = RegistrationState(),
+            onEvent = hiltViewModel()
+        )
     }
 }
