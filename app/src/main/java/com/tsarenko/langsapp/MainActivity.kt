@@ -15,9 +15,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.tsarenko.langsapp.presentation.registration.AuthorizeScreen
+import com.tsarenko.langsapp.presentation.registration.InterestsScreen
 import com.tsarenko.langsapp.presentation.registration.LanguageScreen
 import com.tsarenko.langsapp.presentation.registration.RegistrationViewModel
-import com.tsarenko.langsapp.presentation.registration.InterestsScreen
+import com.tsarenko.langsapp.presentation.registration.WordsPerDayScreen
 import com.tsarenko.langsapp.ui.theme.LangsAppTheme
 import com.tsarenko.langsapp.util.Route
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,18 +49,22 @@ fun LangsAppNavigation() {
 
     NavHost(
         navController = navController,
-        startDestination = Route.chooseHowToAuthorize
+        startDestination = Route.authorization
     ) {
-        composable(route = Route.chooseHowToAuthorize) {
+        composable(route = Route.authorization) {
             AuthorizeScreen(navController, state, onEvent)
         }
 
-        composable(route = Route.chooseLanguage) {
+        composable(route = Route.language) {
             LanguageScreen(navController, state, onEvent)
         }
 
-        composable(route = Route.chooseYourInterests) {
-            InterestsScreen(state)
+        composable(route = Route.interests) {
+            InterestsScreen(navController, state, onEvent)
+        }
+
+        composable(route = Route.wordsPerDay) {
+            WordsPerDayScreen(navController, state)
         }
 
     }

@@ -13,25 +13,28 @@ import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.tsarenko.langsapp.R
+import com.tsarenko.langsapp.domain.model.Interest
 import com.tsarenko.langsapp.ui.theme.Montserrat
 import com.tsarenko.langsapp.util.NextButton
+import com.tsarenko.langsapp.util.Route
 import com.tsarenko.langsapp.util.VerticalSpacer
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun InterestsScreen(
-    state: RegistrationState
+    navController: NavController,
+    state: RegistrationState,
+    onEvent: (RegistrationEvent) -> Unit
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -45,12 +48,10 @@ fun InterestsScreen(
         VerticalSpacer(height = 25)
 
         FlowRow(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-            state.availableInterests.forEach {
-                var selected by remember { mutableStateOf(false)}
+            state.interests.forEach {
                 InterestChip(
                     interest = it,
-                    selected = selected,
-                    onClick = { selected = selected.not() }
+                    onEvent = onEvent
                 )
             }
         }
@@ -58,7 +59,8 @@ fun InterestsScreen(
         Spacer(modifier = Modifier.weight(1f))
 
         NextButton(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate(Route.wordsPerDay) },
+            enabled = state.areInterestsPicked,
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -68,17 +70,19 @@ fun InterestsScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InterestChip(
-    interest: String,
-    selected: Boolean,
-    onClick: () -> Unit
+    interest: Interest,
+    onEvent: (RegistrationEvent) -> Unit
 ) {
     FilterChip(
-        selected = selected,
-        onClick = onClick,
+        selected = interest.isSelected(),
+        onClick = {
+            if (interest.isSelected()) onEvent(RegistrationEvent.UnselectInterest(interest))
+            else onEvent(RegistrationEvent.SelectInterest(interest))
+        },
         shape = RoundedCornerShape(15.dp),
         label = {
             Text(
-                text = interest,
+                text = interest.toString(),
                 fontFamily = Montserrat,
                 fontWeight = FontWeight.SemiBold
             )
@@ -90,6 +94,8 @@ fun InterestChip(
 @Composable
 fun YourInterestScreenPreview() {
     InterestsScreen(
-        state = RegistrationState()
+        navController = rememberNavController(),
+        state = RegistrationState(),
+        onEvent = hiltViewModel()
     )
 }

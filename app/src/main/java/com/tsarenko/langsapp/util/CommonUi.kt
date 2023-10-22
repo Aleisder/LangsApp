@@ -24,10 +24,12 @@ fun HorizontalSpacer(width: Int) {
 @Composable
 fun NextButton(
     onClick: () -> Unit,
+    enabled: Boolean,
     modifier: Modifier = Modifier
 ) {
     Button(
         onClick = onClick,
+        enabled = enabled,
         modifier = modifier
     ) {
         Text(

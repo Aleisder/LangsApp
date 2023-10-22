@@ -20,12 +20,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.tsarenko.langsapp.R
 import com.tsarenko.langsapp.ui.theme.Blue500
 import com.tsarenko.langsapp.util.NextButton
 
 @Composable
-fun HowManyWordsPerDayScreen() {
+fun WordsPerDayScreen(
+    navController: NavController,
+    state: RegistrationState
+) {
 
     Column(
         modifier = Modifier.padding(15.dp),
@@ -55,7 +60,8 @@ fun HowManyWordsPerDayScreen() {
         Spacer(modifier = Modifier.weight(1f))
 
         NextButton(
-            onClick = { /*TODO*/ },
+            onClick = { },
+            enabled = true,
             modifier = Modifier.fillMaxWidth()
         )
     }
@@ -65,6 +71,9 @@ fun HowManyWordsPerDayScreen() {
 @Composable
 fun HowManyWordsPerDayScreenPreview() {
     MaterialTheme() {
-        HowManyWordsPerDayScreen()
+        WordsPerDayScreen(
+            navController = rememberNavController(),
+            state = RegistrationState()
+        )
     }
 }
