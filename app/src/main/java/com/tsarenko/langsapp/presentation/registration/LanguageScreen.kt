@@ -62,7 +62,7 @@ fun LanguageScreen(
 
         NextButton(
             onClick = {
-                navController.navigate(Route.interests)
+                navController.navigate(Route.Screen.interests)
             },
             enabled = true,
             modifier = Modifier.fillMaxWidth()

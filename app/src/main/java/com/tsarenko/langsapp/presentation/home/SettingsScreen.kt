@@ -1,4 +1,4 @@
-package com.tsarenko.langsapp.presentation.profile
+package com.tsarenko.langsapp.presentation.home
 
 import androidx.compose.runtime.Composable
 

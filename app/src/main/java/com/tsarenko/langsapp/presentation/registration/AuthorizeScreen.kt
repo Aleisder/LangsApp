@@ -61,7 +61,7 @@ fun AuthorizeScreen(
 
         Button(
             onClick = {
-                navController.navigate(Route.language)
+                navController.navigate(Route.Screen.language)
             },
             enabled = state.isEmailValid
         ) {

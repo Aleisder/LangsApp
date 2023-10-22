@@ -13,7 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import com.tsarenko.langsapp.presentation.home.HomeViewModel
+import com.tsarenko.langsapp.presentation.home.SyllabusScreen
 import com.tsarenko.langsapp.presentation.registration.AuthorizeScreen
 import com.tsarenko.langsapp.presentation.registration.InterestsScreen
 import com.tsarenko.langsapp.presentation.registration.LanguageScreen
@@ -43,29 +46,48 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun LangsAppNavigation() {
     val navController = rememberNavController()
+
     val registrationViewModel = hiltViewModel<RegistrationViewModel>()
-    val state by registrationViewModel.state.collectAsState()
-    val onEvent = registrationViewModel::onEvent
+    val registrationState by registrationViewModel.state.collectAsState()
+    val registrationOnEvent = registrationViewModel::onEvent
+
+    val homeViewModel = hiltViewModel<HomeViewModel>()
+    val homeState by homeViewModel.state.collectAsState()
 
     NavHost(
         navController = navController,
-        startDestination = Route.authorization
+        startDestination = Route.Feature.registration
     ) {
-        composable(route = Route.authorization) {
-            AuthorizeScreen(navController, state, onEvent)
+        navigation(
+            startDestination = Route.Screen.authorization,
+            route = Route.Feature.registration
+        ) {
+            composable(route = Route.Screen.authorization) {
+                AuthorizeScreen(navController, registrationState, registrationOnEvent)
+            }
+
+            composable(route = Route.Screen.language) {
+                LanguageScreen(navController, registrationState, registrationOnEvent)
+            }
+
+            composable(route = Route.Screen.interests) {
+                InterestsScreen(navController, registrationState, registrationOnEvent)
+            }
+
+            composable(route = Route.Screen.wordsPerDay) {
+                WordsPerDayScreen(navController, registrationState)
+            }
         }
 
-        composable(route = Route.language) {
-            LanguageScreen(navController, state, onEvent)
+        navigation(
+            startDestination = Route.Screen.syllabus,
+            route = Route.Feature.home
+        ) {
+            composable(route = Route.Screen.syllabus) {
+                SyllabusScreen(navController, homeState)
+            }
         }
 
-        composable(route = Route.interests) {
-            InterestsScreen(navController, state, onEvent)
-        }
-
-        composable(route = Route.wordsPerDay) {
-            WordsPerDayScreen(navController, state)
-        }
 
     }
 

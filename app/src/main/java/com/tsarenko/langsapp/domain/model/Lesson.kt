@@ -1,4 +1,4 @@
-package com.tsarenko.langsapp.presentation.syllabus
+package com.tsarenko.langsapp.domain.model
 
 data class Lesson(
     val id: Int,

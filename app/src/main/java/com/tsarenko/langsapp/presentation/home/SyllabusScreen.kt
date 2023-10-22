@@ -1,4 +1,4 @@
-package com.tsarenko.langsapp.presentation.syllabus
+package com.tsarenko.langsapp.presentation.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -24,14 +24,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.tsarenko.langsapp.R
+import com.tsarenko.langsapp.domain.model.Lesson
 import com.tsarenko.langsapp.ui.theme.LangsAppTheme
 import com.tsarenko.langsapp.ui.theme.Montserrat
 import com.tsarenko.langsapp.ui.theme.Typography
 
 @Composable
 fun SyllabusScreen(
-    chapters: List<Chapter>
+    navController: NavController,
+    state: HomeState
 ) {
     Column() {
         Surface(
@@ -52,7 +56,7 @@ fun SyllabusScreen(
                     verticalArrangement = Arrangement.spacedBy(7.dp),
                     modifier = Modifier.height(280.dp)
                 ) {
-                    items(chapters[0].lessons) {
+                    items(state.chapters[0].lessons) {
                         LessonCard(it)
                     }
                 }
@@ -88,25 +92,10 @@ fun LessonCard(lesson: Lesson) {
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun SyllabusScreenPreview() {
-
-    val chapters = listOf(
-        Chapter(
-            number = 0,
-            title = "Basics",
-            lessons = listOf(
-                Lesson(0, "Hello", "R.drawable.hello_lesson_preview", false),
-                Lesson(1, "How are you?", "R.drawable.hello_lesson_preview", false),
-                Lesson(2, "My name is", "R.drawable.hello_lesson_preview", false),
-                Lesson(3, "Hello", "R.drawable.hello_lesson_preview", false),
-                Lesson(4, "Hello", "R.drawable.hello_lesson_preview", false),
-                Lesson(5, "Hello", "R.drawable.hello_lesson_preview", false),
-                Lesson(6, "Hello", "R.drawable.hello_lesson_preview", false),
-                Lesson(7, "Hello", "R.drawable.hello_lesson_preview", false),
-            )
-        )
-    )
-
     LangsAppTheme {
-        SyllabusScreen(chapters)
+        SyllabusScreen(
+            navController = rememberNavController(),
+            state = HomeState()
+        )
     }
 }
