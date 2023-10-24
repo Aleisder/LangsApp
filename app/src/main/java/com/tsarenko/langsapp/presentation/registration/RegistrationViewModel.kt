@@ -51,6 +51,12 @@ class RegistrationViewModel @Inject constructor(
                 }
             }
 
+            is RegistrationEvent.SetWordsPerDay -> {
+                _state.update {
+                    it.copy(wordsPerDay = event.amount)
+                }
+            }
+
             is RegistrationEvent.SignUp -> {
                 signUpUseCase(_state.value.toSignUpBody())
             }
