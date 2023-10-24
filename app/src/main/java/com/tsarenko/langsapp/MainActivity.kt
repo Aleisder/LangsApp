@@ -19,10 +19,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import com.tsarenko.langsapp.presentation.home.screens.ChatScreen
+import com.tsarenko.langsapp.presentation.chat.ChatScreen
 import com.tsarenko.langsapp.presentation.home.HomeViewModel
 import com.tsarenko.langsapp.presentation.home.LangsBottomNavigationBar
-import com.tsarenko.langsapp.presentation.home.screens.ProfileScreen
+import com.tsarenko.langsapp.presentation.profile.ProfileScreen
 import com.tsarenko.langsapp.presentation.home.screens.SyllabusScreen
 import com.tsarenko.langsapp.presentation.registration.screens.AuthorizeScreen
 import com.tsarenko.langsapp.presentation.registration.screens.InterestsScreen

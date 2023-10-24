@@ -1,4 +1,4 @@
-package com.tsarenko.langsapp.presentation.home.screens
+package com.tsarenko.langsapp.presentation.profile
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
