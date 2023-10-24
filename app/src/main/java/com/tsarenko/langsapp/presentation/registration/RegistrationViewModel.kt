@@ -30,37 +30,31 @@ class RegistrationViewModel @Inject constructor(
                 }
             }
 
-            is RegistrationEvent.ChooseLanguage -> {
-
-            }
-
-            is RegistrationEvent.SelectInterest -> {
+            is RegistrationEvent.SelectLanguage -> {
+                event.language.selected = true
                 _state.update {
-                    // TODO: Fix chip selected visibility
-                    val newList = it.interests
-                    val index = it.interests.indexOf(event.interest)
-                    newList[index].select()
-
-                    val areInterestPicked = newList.any { interest -> interest.isSelected() }
                     it.copy(
-                        interests = newList,
-                        areInterestsPicked = areInterestPicked
+                        language = event.language
                     )
                 }
             }
 
-            is RegistrationEvent.UnselectInterest -> {
+            is RegistrationEvent.OnInterestClick -> {
                 _state.update {
-                    val newList = it.interests
-                    val index = it.interests.indexOf(event.interest)
-                    newList[index].unselect()
-                    val areInterestPicked = newList.any { interest -> interest.isSelected() }
                     it.copy(
-                        interests = newList,
-                        areInterestsPicked =  areInterestPicked
+                        interests = it.interests.apply {
+                            if (it.interests.contains(event.interest)) {
+                                remove(event.interest)
+                            } else add(event.interest)
+                        }
                     )
                 }
             }
+
+            is RegistrationEvent.SignUp -> {
+                signUpUseCase(_state.value.toSignUpBody())
+            }
+
         }
     }
 

@@ -4,12 +4,12 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import com.tsarenko.langsapp.presentation.registration.AuthorizeScreen
-import com.tsarenko.langsapp.presentation.registration.InterestsScreen
-import com.tsarenko.langsapp.presentation.registration.LanguageScreen
+import com.tsarenko.langsapp.presentation.registration.screens.AuthorizeScreen
+import com.tsarenko.langsapp.presentation.registration.screens.InterestsScreen
+import com.tsarenko.langsapp.presentation.registration.screens.LanguageScreen
 import com.tsarenko.langsapp.presentation.registration.RegistrationEvent
 import com.tsarenko.langsapp.presentation.registration.RegistrationState
-import com.tsarenko.langsapp.presentation.registration.WordsPerDayScreen
+import com.tsarenko.langsapp.presentation.registration.screens.WordsPerDayScreen
 
 fun NavGraphBuilder.registrationGraph(
     navController: NavHostController,

@@ -1,4 +1,4 @@
-package com.tsarenko.langsapp.presentation.registration
+package com.tsarenko.langsapp.presentation.registration.screens
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -27,6 +27,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.tsarenko.langsapp.R
+import com.tsarenko.langsapp.presentation.registration.RegistrationEvent
+import com.tsarenko.langsapp.presentation.registration.RegistrationState
 import com.tsarenko.langsapp.ui.theme.GeologicaFontFamily
 import com.tsarenko.langsapp.ui.theme.LangsAppTheme
 import com.tsarenko.langsapp.util.Route

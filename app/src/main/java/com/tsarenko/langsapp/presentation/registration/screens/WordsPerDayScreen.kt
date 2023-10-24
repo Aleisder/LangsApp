@@ -1,4 +1,4 @@
-package com.tsarenko.langsapp.presentation.registration
+package com.tsarenko.langsapp.presentation.registration.screens
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
@@ -24,6 +24,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.tsarenko.langsapp.R
+import com.tsarenko.langsapp.presentation.registration.RegistrationEvent
+import com.tsarenko.langsapp.presentation.registration.RegistrationState
 import com.tsarenko.langsapp.ui.theme.Blue500
 import com.tsarenko.langsapp.util.Graph
 import com.tsarenko.langsapp.util.NextButton

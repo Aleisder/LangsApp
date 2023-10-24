@@ -1,4 +1,4 @@
-package com.tsarenko.langsapp.presentation.home
+package com.tsarenko.langsapp.presentation.home.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -29,6 +29,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.tsarenko.langsapp.R
 import com.tsarenko.langsapp.domain.model.Lesson
+import com.tsarenko.langsapp.presentation.home.HomeEvent
+import com.tsarenko.langsapp.presentation.home.HomeState
 import com.tsarenko.langsapp.ui.theme.LangsAppTheme
 import com.tsarenko.langsapp.ui.theme.Montserrat
 import com.tsarenko.langsapp.ui.theme.Typography

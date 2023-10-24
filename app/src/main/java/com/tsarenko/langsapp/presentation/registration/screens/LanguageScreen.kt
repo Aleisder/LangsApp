@@ -1,7 +1,8 @@
-package com.tsarenko.langsapp.presentation.registration
+package com.tsarenko.langsapp.presentation.registration.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,8 +28,12 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.tsarenko.langsapp.R
 import com.tsarenko.langsapp.domain.model.Language
+import com.tsarenko.langsapp.presentation.registration.RegistrationEvent
+import com.tsarenko.langsapp.presentation.registration.RegistrationState
+import com.tsarenko.langsapp.ui.theme.Blue500
 import com.tsarenko.langsapp.ui.theme.LangsAppTheme
 import com.tsarenko.langsapp.ui.theme.Montserrat
+import com.tsarenko.langsapp.util.Constants
 import com.tsarenko.langsapp.util.HorizontalSpacer
 import com.tsarenko.langsapp.util.NextButton
 import com.tsarenko.langsapp.util.Route
@@ -54,7 +59,9 @@ fun LanguageScreen(
         VerticalSpacer(25)
 
         LanguageList(
-            languages = state.availableLanguages,
+            languages = Constants.availableLanguages,
+            state,
+            onEvent,
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -64,21 +71,30 @@ fun LanguageScreen(
             onClick = {
                 navController.navigate(Route.INTERESTS)
             },
-            enabled = true,
+            enabled = state.language != null,
             modifier = Modifier.fillMaxWidth()
         )
     }
 }
 
 @Composable
-fun LanguageListItem(language: Language) {
+fun LanguageListItem(
+    language: Language,
+    state: RegistrationState,
+    onEvent: (RegistrationEvent) -> Unit
+) {
+    val backgroundColor = if (language == state.language) Blue500 else MaterialTheme.colorScheme.background
     Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(25.dp)
+        modifier = Modifier.fillMaxWidth().background(backgroundColor),
+        shape = RoundedCornerShape(25.dp),
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(horizontal = 15.dp, vertical = 10.dp)
+            modifier = Modifier
+                .padding(horizontal = 15.dp, vertical = 10.dp)
+                .clickable {
+                    onEvent(RegistrationEvent.SelectLanguage(language))
+                }
 
         ) {
             Image(
@@ -99,6 +115,8 @@ fun LanguageListItem(language: Language) {
 @Composable
 fun LanguageList(
     languages: List<Language>,
+    state: RegistrationState,
+    onEvent: (RegistrationEvent) -> Unit,
     modifier: Modifier
 ) {
     LazyColumn(
@@ -106,7 +124,7 @@ fun LanguageList(
         modifier = modifier
     ) {
         items(languages) { language ->
-            LanguageListItem(language)
+            LanguageListItem(language, state, onEvent)
         }
     }
 }
