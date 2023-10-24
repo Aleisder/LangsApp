@@ -1,21 +1,28 @@
 package com.tsarenko.langsapp
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import com.tsarenko.langsapp.presentation.home.ChatScreen
 import com.tsarenko.langsapp.presentation.home.HomeViewModel
+import com.tsarenko.langsapp.presentation.home.LangsBottomNavigationBar
+import com.tsarenko.langsapp.presentation.home.ProfileScreen
 import com.tsarenko.langsapp.presentation.home.SyllabusScreen
 import com.tsarenko.langsapp.presentation.registration.AuthorizeScreen
 import com.tsarenko.langsapp.presentation.registration.InterestsScreen
@@ -23,6 +30,7 @@ import com.tsarenko.langsapp.presentation.registration.LanguageScreen
 import com.tsarenko.langsapp.presentation.registration.RegistrationViewModel
 import com.tsarenko.langsapp.presentation.registration.WordsPerDayScreen
 import com.tsarenko.langsapp.ui.theme.LangsAppTheme
+import com.tsarenko.langsapp.util.Graph
 import com.tsarenko.langsapp.util.Route
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -47,48 +55,78 @@ class MainActivity : ComponentActivity() {
 fun LangsAppNavigation() {
     val navController = rememberNavController()
 
-    val registrationViewModel = hiltViewModel<RegistrationViewModel>()
-    val registrationState by registrationViewModel.state.collectAsState()
-    val registrationOnEvent = registrationViewModel::onEvent
-
-    val homeViewModel = hiltViewModel<HomeViewModel>()
-    val homeState by homeViewModel.state.collectAsState()
+    val viewModel = hiltViewModel<RegistrationViewModel>()
+    val registrationState by viewModel.state.collectAsState()
+    val registrationOnEvent = viewModel::onEvent
 
     NavHost(
         navController = navController,
-        startDestination = Route.Feature.registration
+        startDestination = Graph.REGISTRATION
     ) {
+
         navigation(
-            startDestination = Route.Screen.authorization,
-            route = Route.Feature.registration
+            startDestination = Route.AUTHORIZATION,
+            route = Graph.REGISTRATION
         ) {
-            composable(route = Route.Screen.authorization) {
+            composable(route = Route.AUTHORIZATION) {
                 AuthorizeScreen(navController, registrationState, registrationOnEvent)
             }
 
-            composable(route = Route.Screen.language) {
+            composable(route = Route.LANGUAGE) {
                 LanguageScreen(navController, registrationState, registrationOnEvent)
             }
 
-            composable(route = Route.Screen.interests) {
+            composable(route = Route.INTERESTS) {
                 InterestsScreen(navController, registrationState, registrationOnEvent)
             }
 
-            composable(route = Route.Screen.wordsPerDay) {
-                WordsPerDayScreen(navController, registrationState)
+            composable(route = Route.WORDS_PER_DAY) {
+                WordsPerDayScreen(navController, registrationState, registrationOnEvent)
             }
         }
 
-        navigation(
-            startDestination = Route.Screen.syllabus,
-            route = Route.Feature.home
-        ) {
-            composable(route = Route.Screen.syllabus) {
-                SyllabusScreen(navController, homeState)
-            }
+        composable(route = Graph.HOME) {
+            HomeNavigation()
         }
 
+    }
 
+}
+
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun HomeNavigation() {
+    val navController = rememberNavController()
+
+    Scaffold(
+        bottomBar = { LangsBottomNavigationBar(navController) }
+    ) {
+        HomeNavGraph(navController = navController)
+    }
+}
+
+@Composable
+fun HomeNavGraph(navController: NavHostController) {
+
+    val homeViewModel = hiltViewModel<HomeViewModel>()
+    val homeState by homeViewModel.state.collectAsState()
+    val homeOnEvent = homeViewModel::onEvent
+
+    NavHost(
+        navController = navController,
+        route = Graph.HOME,
+        startDestination = Route.SYLLABUS
+    ) {
+        composable(route = Route.SYLLABUS) {
+            SyllabusScreen(navController, homeState, homeOnEvent)
+        }
+        composable(route = Route.CHAT) {
+            ChatScreen()
+        }
+        composable(route = Route.PROFILE) {
+            ProfileScreen()
+        }
     }
 
 }

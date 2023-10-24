@@ -61,6 +61,7 @@ dependencies {
 
     // Jetpack Navigation
     implementation "androidx.navigation:navigation-compose:$navigation_version"
+    implementation "androidx.compose.material:material:$compose_version"
     implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.2"
 
     implementation "androidx.compose.runtime:runtime:1.5.4"

@@ -59,7 +59,7 @@ fun InterestsScreen(
         Spacer(modifier = Modifier.weight(1f))
 
         NextButton(
-            onClick = { navController.navigate(Route.Screen.wordsPerDay) },
+            onClick = { navController.navigate(Route.WORDS_PER_DAY) },
             enabled = state.areInterestsPicked,
             modifier = Modifier.fillMaxWidth()
         )

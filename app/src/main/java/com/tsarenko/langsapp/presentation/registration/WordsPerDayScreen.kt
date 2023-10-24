@@ -20,16 +20,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.tsarenko.langsapp.R
 import com.tsarenko.langsapp.ui.theme.Blue500
+import com.tsarenko.langsapp.util.Graph
 import com.tsarenko.langsapp.util.NextButton
 
 @Composable
 fun WordsPerDayScreen(
     navController: NavController,
-    state: RegistrationState
+    state: RegistrationState,
+    onEvent: (RegistrationEvent) -> Unit
 ) {
 
     Column(
@@ -60,7 +63,7 @@ fun WordsPerDayScreen(
         Spacer(modifier = Modifier.weight(1f))
 
         NextButton(
-            onClick = { },
+            onClick = { navController.navigate(Graph.HOME) },
             enabled = true,
             modifier = Modifier.fillMaxWidth()
         )
@@ -73,7 +76,8 @@ fun HowManyWordsPerDayScreenPreview() {
     MaterialTheme() {
         WordsPerDayScreen(
             navController = rememberNavController(),
-            state = RegistrationState()
+            state = RegistrationState(),
+            onEvent = hiltViewModel()
         )
     }
 }

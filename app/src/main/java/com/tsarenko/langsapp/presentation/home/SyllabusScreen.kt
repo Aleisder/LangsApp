@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.tsarenko.langsapp.R
@@ -35,7 +36,8 @@ import com.tsarenko.langsapp.ui.theme.Typography
 @Composable
 fun SyllabusScreen(
     navController: NavController,
-    state: HomeState
+    state: HomeState,
+    onEvent: (HomeEvent) -> Unit
 ) {
     Column() {
         Surface(
@@ -95,7 +97,8 @@ fun SyllabusScreenPreview() {
     LangsAppTheme {
         SyllabusScreen(
             navController = rememberNavController(),
-            state = HomeState()
+            state = HomeState(),
+            onEvent = hiltViewModel()
         )
     }
 }
