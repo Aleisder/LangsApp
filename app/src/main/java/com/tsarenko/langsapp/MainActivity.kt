@@ -24,6 +24,8 @@ import com.tsarenko.langsapp.presentation.home.HomeViewModel
 import com.tsarenko.langsapp.presentation.home.LangsBottomNavigationBar
 import com.tsarenko.langsapp.presentation.profile.ProfileScreen
 import com.tsarenko.langsapp.presentation.home.screens.SyllabusScreen
+import com.tsarenko.langsapp.presentation.lesson.LessonScreen
+import com.tsarenko.langsapp.presentation.lesson.LessonViewModel
 import com.tsarenko.langsapp.presentation.registration.screens.AuthorizeScreen
 import com.tsarenko.langsapp.presentation.registration.screens.InterestsScreen
 import com.tsarenko.langsapp.presentation.registration.screens.LanguageScreen
@@ -113,6 +115,9 @@ fun HomeNavGraph(navController: NavHostController) {
     val homeState by homeViewModel.state.collectAsState()
     val homeOnEvent = homeViewModel::onEvent
 
+    val lessonViewModel = hiltViewModel<LessonViewModel>()
+    val lessonState by lessonViewModel.state.collectAsState()
+
     NavHost(
         navController = navController,
         route = Graph.HOME,
@@ -126,6 +131,15 @@ fun HomeNavGraph(navController: NavHostController) {
         }
         composable(route = Route.PROFILE) {
             ProfileScreen()
+        }
+
+        navigation(
+            route = Graph.LESSON,
+            startDestination = Route.LESSON
+        ) {
+            composable(route = Route.LESSON) {
+                LessonScreen(lessonState, lessonViewModel::onEvent)
+            }
         }
     }
 

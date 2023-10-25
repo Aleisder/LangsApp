@@ -16,4 +16,8 @@
     <string name="basics">Основы</string>
     <string name="select_language">Выбери язык</string>
     <string name="your_interests">Твои интересы</string>
+    <string name="are_you_sure_you_want_to_quit">Вы уверены, что хотите покинуть занятие?</string>
+    <string name="your_progress_will_be_lost">Весь прогресс будет утерян</string>
+    <string name="quit">Покинуть</string>
+    <string name="stay">Остаться</string>
 </resources>

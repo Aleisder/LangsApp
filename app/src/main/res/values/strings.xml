@@ -15,4 +15,8 @@
     <string name="basics">Basics</string>
     <string name="select_language">Select language</string>
     <string name="your_interests">Your interests</string>
+    <string name="are_you_sure_you_want_to_quit">Are you sure you want to leave?</string>
+    <string name="your_progress_will_be_lost">All progress will be lost</string>
+    <string name="quit">Quit</string>
+    <string name="stay">Stay\n</string>
 </resources>

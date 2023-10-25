@@ -1,6 +1,7 @@
 package com.tsarenko.langsapp.presentation.home.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -34,6 +35,7 @@ import com.tsarenko.langsapp.presentation.home.HomeState
 import com.tsarenko.langsapp.ui.theme.LangsAppTheme
 import com.tsarenko.langsapp.ui.theme.Montserrat
 import com.tsarenko.langsapp.ui.theme.Typography
+import com.tsarenko.langsapp.util.Route
 
 @Composable
 fun SyllabusScreen(
@@ -61,7 +63,7 @@ fun SyllabusScreen(
                     modifier = Modifier.height(280.dp)
                 ) {
                     items(state.chapters[0].lessons) {
-                        LessonCard(it)
+                        LessonCard(it, navController)
                     }
                 }
             }
@@ -73,13 +75,20 @@ fun SyllabusScreen(
 }
 
 @Composable
-fun LessonCard(lesson: Lesson) {
+fun LessonCard(
+    lesson: Lesson,
+    navController: NavController
+) {
     Card(
         modifier = Modifier.size(110.dp, 130.dp)
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier
+                .padding(8.dp)
+                .clickable {
+                    navController.navigate(Route.LESSON)
+                }
         ) {
             Image(painterResource(R.drawable.hello_lesson_preview), contentDescription = null)
             Spacer(Modifier.weight(1f))

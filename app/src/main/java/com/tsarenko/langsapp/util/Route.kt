@@ -9,4 +9,6 @@ object Route {
     const val SYLLABUS = "syllabus_screen"
     const val CHAT = "chat_screen"
     const val PROFILE = "profile_screen"
+
+    const val LESSON = "lesson_screen"
 }
