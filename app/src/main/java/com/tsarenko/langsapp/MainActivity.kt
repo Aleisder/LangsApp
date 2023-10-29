@@ -22,14 +22,14 @@ import androidx.navigation.compose.rememberNavController
 import com.tsarenko.langsapp.presentation.chat.ChatScreen
 import com.tsarenko.langsapp.presentation.home.HomeViewModel
 import com.tsarenko.langsapp.presentation.home.LangsBottomNavigationBar
-import com.tsarenko.langsapp.presentation.profile.ProfileScreen
 import com.tsarenko.langsapp.presentation.home.screens.SyllabusScreen
 import com.tsarenko.langsapp.presentation.lesson.LessonScreen
 import com.tsarenko.langsapp.presentation.lesson.LessonViewModel
+import com.tsarenko.langsapp.presentation.profile.ProfileScreen
+import com.tsarenko.langsapp.presentation.registration.RegistrationViewModel
 import com.tsarenko.langsapp.presentation.registration.screens.AuthorizeScreen
 import com.tsarenko.langsapp.presentation.registration.screens.InterestsScreen
 import com.tsarenko.langsapp.presentation.registration.screens.LanguageScreen
-import com.tsarenko.langsapp.presentation.registration.RegistrationViewModel
 import com.tsarenko.langsapp.presentation.registration.screens.WordsPerDayScreen
 import com.tsarenko.langsapp.ui.theme.LangsAppTheme
 import com.tsarenko.langsapp.util.Graph
@@ -117,6 +117,7 @@ fun HomeNavGraph(navController: NavHostController) {
 
     val lessonViewModel = hiltViewModel<LessonViewModel>()
     val lessonState by lessonViewModel.state.collectAsState()
+    val lessonOnEvent = lessonViewModel::onEvent
 
     NavHost(
         navController = navController,
@@ -138,7 +139,8 @@ fun HomeNavGraph(navController: NavHostController) {
             startDestination = Route.LESSON
         ) {
             composable(route = Route.LESSON) {
-                LessonScreen(lessonState, lessonViewModel::onEvent)
+                //LessonNavigation()
+                LessonScreen(navController, lessonState, lessonOnEvent)
             }
         }
     }

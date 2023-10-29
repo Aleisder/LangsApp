@@ -23,27 +23,32 @@ fun LangsBottomNavigationBar(
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = backStackEntry?.destination
 
-    BottomAppBar() {
-        items.forEach { screen ->
-            BottomNavigationItem(
-                selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
-                onClick = {
-                    navController.navigate(screen.route) {
-                        launchSingleTop = true
-                        restoreState = true
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
+    val isBottomBarShown = items.any { it.route == currentDestination?.route }
+
+    if (isBottomBarShown) {
+        BottomAppBar() {
+            items.forEach { screen ->
+                BottomNavigationItem(
+                    selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                    onClick = {
+                        navController.navigate(screen.route) {
+                            launchSingleTop = true
+                            restoreState = true
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
                         }
+                    },
+                    icon = {
+                        Image(
+                            imageVector = screen.icon,
+                            contentDescription = null
+                        )
                     }
-                },
-                icon = {
-                    Image(
-                        imageVector = screen.icon,
-                        contentDescription = null
-                    )
-                }
-            )
+                )
+            }
         }
     }
+
 }
 
