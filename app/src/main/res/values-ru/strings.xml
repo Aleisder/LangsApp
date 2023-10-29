@@ -20,4 +20,6 @@
     <string name="your_progress_will_be_lost">Весь прогресс будет утерян</string>
     <string name="quit">Покинуть</string>
     <string name="stay">Остаться</string>
+    <string name="report_issue">Report issue</string>
+    <string name="send_report">Send report</string>
 </resources>

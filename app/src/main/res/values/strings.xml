@@ -19,4 +19,6 @@
     <string name="your_progress_will_be_lost">All progress will be lost</string>
     <string name="quit">Quit</string>
     <string name="stay">Stay\n</string>
+    <string name="report_issue">Report issue</string>
+    <string name="send_report">Send report</string>
 </resources>

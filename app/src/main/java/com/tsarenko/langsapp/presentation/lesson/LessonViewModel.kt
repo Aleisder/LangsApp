@@ -36,6 +36,38 @@ class LessonViewModel @Inject constructor(
                 }
             }
 
+            is LessonEvent.ShowDropDownMenu -> {
+                _state.update {
+                    it.copy(
+                        isDropDownMenuShown = true
+                    )
+                }
+            }
+
+            is LessonEvent.HideDropDownMenu -> {
+                _state.update {
+                    it.copy(
+                        isDropDownMenuShown = false
+                    )
+                }
+            }
+
+            is LessonEvent.ShowReportModalSheet -> {
+                _state.update {
+                    it.copy(
+                        isReportBottomSheetShown = true
+                    )
+                }
+            }
+
+            is LessonEvent.HideReportModalSheet -> {
+                _state.update {
+                    it.copy(
+                        isReportBottomSheetShown = false
+                    )
+                }
+            }
+
         }
     }
 }
