@@ -21,4 +21,8 @@
     <string name="stay">Stay\n</string>
     <string name="report_issue">Report issue</string>
     <string name="send_report">Send report</string>
+    <string name="specify_error_type">Please, specify the error type:</string>
+    <string name="thanks_for_your_feedback">Thanks for your feedback!</string>
+    <string name="got_it">Got it</string>
+    <string name="every_report_helps">Every report helps Langs to get better. We appreciate your piece of help</string>
 </resources>

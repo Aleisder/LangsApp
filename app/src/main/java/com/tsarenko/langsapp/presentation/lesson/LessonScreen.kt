@@ -28,6 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import com.tsarenko.langsapp.R
 import com.tsarenko.langsapp.presentation.lesson.components.LeaveLessonAlertDialog
 import com.tsarenko.langsapp.presentation.lesson.components.ReportIssueBottomSheet
+import com.tsarenko.langsapp.presentation.lesson.components.ThanksForTheReportDialog
 import com.tsarenko.langsapp.util.Graph
 
 @Composable
@@ -40,13 +41,24 @@ fun LessonScreen(
         state.isDialogShown -> {
             LeaveLessonAlertDialog(
                 onDismissClick = { onEvent(LessonEvent.CloseDialog) },
-                onConfirmClick = { navController.navigate(Graph.HOME) }
+                onConfirmClick = {
+                    onEvent(LessonEvent.CloseDialog)
+                    navController.navigate(Graph.HOME)
+                }
             )
         }
 
         state.isReportBottomSheetShown -> {
             ReportIssueBottomSheet(
-                onDismissRequest = { onEvent(LessonEvent.HideReportModalSheet) }
+                onDismissRequest = { onEvent(LessonEvent.HideReportModalSheet) },
+                state = state,
+                onEvent = onEvent
+            )
+        }
+
+        state.isThanksForTheReportDialogShown -> {
+            ThanksForTheReportDialog(
+                onDismissRequest = { onEvent(LessonEvent.HideThanksForTheReportDialog) }
             )
         }
     }

@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -88,7 +87,9 @@ fun LangsAppNavigation() {
         }
 
         composable(route = Graph.HOME) {
-            HomeNavigation()
+            LangsAppTheme {
+                HomeNavigation()
+            }
         }
 
     }
@@ -96,7 +97,6 @@ fun LangsAppNavigation() {
 }
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeNavigation() {
     val navController = rememberNavController()
@@ -139,7 +139,6 @@ fun HomeNavGraph(navController: NavHostController) {
             startDestination = Route.LESSON
         ) {
             composable(route = Route.LESSON) {
-                //LessonNavigation()
                 LessonScreen(navController, lessonState, lessonOnEvent)
             }
         }

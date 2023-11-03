@@ -18,56 +18,90 @@ class LessonViewModel @Inject constructor(
 
     fun onEvent(event: LessonEvent) {
 
-        when (event) {
+            when (event) {
 
-            is LessonEvent.OpenDialog -> {
-                _state.update {
-                    it.copy(
-                        isDialogShown = true
-                    )
+                is LessonEvent.OpenDialog -> {
+                    _state.update {
+                        it.copy(
+                            isDialogShown = true
+                        )
+                    }
                 }
-            }
 
-            is LessonEvent.CloseDialog -> {
-                _state.update {
-                    it.copy(
-                        isDialogShown = false
-                    )
+                is LessonEvent.CloseDialog -> {
+                    _state.update {
+                        it.copy(
+                            isDialogShown = false
+                        )
+                    }
                 }
-            }
 
-            is LessonEvent.ShowDropDownMenu -> {
-                _state.update {
-                    it.copy(
-                        isDropDownMenuShown = true
-                    )
+                is LessonEvent.ShowDropDownMenu -> {
+                    _state.update {
+                        it.copy(
+                            isDropDownMenuShown = true
+                        )
+                    }
                 }
-            }
 
-            is LessonEvent.HideDropDownMenu -> {
-                _state.update {
-                    it.copy(
-                        isDropDownMenuShown = false
-                    )
+                is LessonEvent.HideDropDownMenu -> {
+                    _state.update {
+                        it.copy(
+                            isDropDownMenuShown = false
+                        )
+                    }
                 }
-            }
 
-            is LessonEvent.ShowReportModalSheet -> {
-                _state.update {
-                    it.copy(
-                        isReportBottomSheetShown = true
-                    )
+                is LessonEvent.ShowReportModalSheet -> {
+                    _state.update {
+                        it.copy(
+                            isReportBottomSheetShown = true
+                        )
+                    }
                 }
-            }
 
-            is LessonEvent.HideReportModalSheet -> {
-                _state.update {
-                    it.copy(
-                        isReportBottomSheetShown = false
-                    )
+                is LessonEvent.HideReportModalSheet -> {
+                    _state.update {
+                        it.copy(
+                            isReportBottomSheetShown = false
+                        )
+                    }
                 }
-            }
 
+                is LessonEvent.SetReportDescription -> {
+                    _state.update {
+                        it.copy(
+                            reportDescription = event.description
+                        )
+                    }
+                }
+
+                is LessonEvent.ShowThanksForTheReportDialog -> {
+                    _state.update {
+                        it.copy(
+                            isThanksForTheReportDialogShown = true
+                        )
+                    }
+                }
+
+                is LessonEvent.HideThanksForTheReportDialog -> {
+                    _state.update {
+                        it.copy(
+                            isThanksForTheReportDialogShown = false
+                        )
+                    }
+                }
+
+                is LessonEvent.SendReport -> {
+                    _state.update {
+                        it.copy(
+                            isReportBottomSheetShown = false,
+                            reportDescription = "",
+
+                            )
+                    }
+                }
+
+            }
         }
     }
-}
