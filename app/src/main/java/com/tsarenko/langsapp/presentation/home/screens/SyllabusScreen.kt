@@ -1,41 +1,33 @@
 package com.tsarenko.langsapp.presentation.home.screens
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.tsarenko.langsapp.R
-import com.tsarenko.langsapp.domain.model.Lesson
+import com.tsarenko.langsapp.domain.model.Chapter
 import com.tsarenko.langsapp.presentation.home.HomeEvent
 import com.tsarenko.langsapp.presentation.home.HomeState
+import com.tsarenko.langsapp.presentation.home.components.LessonCard
 import com.tsarenko.langsapp.ui.theme.LangsAppTheme
-import com.tsarenko.langsapp.ui.theme.Montserrat
 import com.tsarenko.langsapp.ui.theme.Typography
-import com.tsarenko.langsapp.util.Route
+import com.tsarenko.langsapp.util.VerticalSpacer
 
 @Composable
 fun SyllabusScreen(
@@ -48,56 +40,59 @@ fun SyllabusScreen(
             shape = RoundedCornerShape(15.dp),
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(15.dp)
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
-                    text = stringResource(id = R.string.basics),
-                    style = Typography.titleLarge
-                )
-                LazyHorizontalGrid(
-                    rows = GridCells.Fixed(2),
-                    horizontalArrangement = Arrangement.spacedBy(7.dp),
-                    verticalArrangement = Arrangement.spacedBy(7.dp),
-                    modifier = Modifier.height(280.dp)
-                ) {
-                    items(state.chapters[0].lessons) {
-                        LessonCard(it, navController)
-                    }
+                state.syllabus.chapters.forEach {
+                    ChapterTab(
+                        chapter = it,
+                        navController = navController
+                    )
+                    VerticalSpacer(20)
                 }
             }
 
         }
     }
-
-
 }
 
 @Composable
-fun LessonCard(
-    lesson: Lesson,
+fun ChapterTab(
+    chapter: Chapter,
     navController: NavController
 ) {
-    Card(
-        modifier = Modifier.size(110.dp, 130.dp)
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .padding(8.dp)
-                .clickable {
-                    navController.navigate(Route.LESSON)
-                }
+    Column {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(painterResource(R.drawable.hello_lesson_preview), contentDescription = null)
-            Spacer(Modifier.weight(1f))
             Text(
-                text = lesson.title,
-                fontFamily = Montserrat,
-                fontWeight = FontWeight.SemiBold,
-                textAlign = TextAlign.Center
+                text = chapter.title,
+                style = Typography.titleLarge
             )
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            Text(
+                text = stringResource(id = R.string.view_all),
+                modifier = Modifier.clickable {
+                    // TODO: implement screen with expanded lessons list
+                }
+            )
+        }
+
+        VerticalSpacer(10)
+
+        LazyRow(
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            items(chapter.lessons) {
+                LessonCard(
+                    lesson = it,
+                    navController = navController
+                )
+            }
         }
     }
 }
@@ -109,7 +104,7 @@ fun SyllabusScreenPreview() {
         SyllabusScreen(
             navController = rememberNavController(),
             state = HomeState(),
-            onEvent = hiltViewModel()
+            onEvent = {}
         )
     }
 }
