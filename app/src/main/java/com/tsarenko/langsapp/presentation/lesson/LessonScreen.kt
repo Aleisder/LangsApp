@@ -15,20 +15,20 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.tsarenko.langsapp.R
+import com.tsarenko.langsapp.domain.model.LessonUnit
 import com.tsarenko.langsapp.presentation.lesson.components.LeaveLessonAlertDialog
+import com.tsarenko.langsapp.presentation.lesson.components.QuestionUnitContent
 import com.tsarenko.langsapp.presentation.lesson.components.ReportIssueBottomSheet
 import com.tsarenko.langsapp.presentation.lesson.components.ThanksForTheReportDialog
+import com.tsarenko.langsapp.ui.theme.LangsAppTheme
 import com.tsarenko.langsapp.util.Graph
 
 @Composable
@@ -102,10 +102,17 @@ fun LessonScreen(
                     onClick = { onEvent(LessonEvent.ShowReportModalSheet) }
                 )
             }
-
-
         }
 
+        when (state.currentUnit) {
+
+            is LessonUnit.QuestionUnit -> {
+                QuestionUnitContent(
+                    questionUnit = state.currentUnit as LessonUnit.QuestionUnit,
+                    modifier = Modifier.padding(top = 20.dp)
+                )
+            }
+        }
 
     }
 
@@ -114,12 +121,18 @@ fun LessonScreen(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun LessonScreenPreview() {
-    val viewModel = hiltViewModel<LessonViewModel>()
-    val state by viewModel.state.collectAsState()
 
-    LessonScreen(
-        navController = rememberNavController(),
-        state = state,
-        onEvent = viewModel::onEvent
+    val testUnit = LessonUnit.QuestionUnit(
+        question = "You meet someone you know in the morning. How can you greet him?",
+        answers = listOf("Guten Abend", "Guten Morgen", "Gunet Nacht", "Guten Tag"),
+        correctAnswer = "Guten Morgen"
     )
+
+    LangsAppTheme {
+        LessonScreen(
+            navController = rememberNavController(),
+            state = LessonState(currentUnit = testUnit),
+            onEvent = {}
+        )
+    }
 }
